@@ -37,8 +37,8 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background p-4 pb-20">
-        <div className="mx-auto max-w-lg space-y-6 pt-4">
+      <div className="min-h-screen bg-background p-4 flex flex-col justify-between">
+        <div className="mx-auto max-w-lg space-y-6">
           {/* Pace Section */}
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
@@ -117,7 +117,7 @@ export function App() {
         </div>
 
         {/* Footer */}
-        <footer className="fixed bottom-0 left-0 right-0 p-4 text-center">
+        <footer className="p-4 pb-0 text-center">
           <a
             href="https://github.com/Briggybros/runpace.app"
             target="_blank"
