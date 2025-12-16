@@ -8,7 +8,6 @@
     "css": "src/index.css",
     "baseColor": "gray",
     "cssVariables": true,
-    "theme": "orange",
     "prefix": ""
   },
   "iconLibrary": "lucide",
