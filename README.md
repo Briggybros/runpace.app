@@ -1,2 +1,2 @@
-# runpace.app
+# RunPace.app
 Quick pace conversion
