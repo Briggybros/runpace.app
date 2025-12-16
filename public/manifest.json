@@ -1,0 +1,44 @@
+{
+  "theme_color": "#ff6900",
+  "background_color": "#030712",
+  "orientation": "portrait",
+  "display": "standalone",
+  "dir": "left",
+  "lang": "en",
+  "name": "RunPace",
+  "short_name": "RunPace",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/icon-72.png",
+      "type": "image/png",
+      "sizes": "72x72"
+    },
+    {
+      "src": "/icon-128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/icon-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
