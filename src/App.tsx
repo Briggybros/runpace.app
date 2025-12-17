@@ -38,7 +38,7 @@ export function App() {
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background p-4 flex flex-col justify-between">
-        <div className="mx-auto max-w-lg space-y-6">
+        <div className="max-w-lg space-y-6">
           {/* Pace Section */}
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
@@ -50,13 +50,11 @@ export function App() {
                 label="min/km"
                 value={paceSecondsPerKilometer}
                 onChange={(v) => setPaceSecondsPerKilometer(v)}
-                placeholder="0:00"
               />
               <PaceInput
                 label="min/mile"
                 value={paceSecondsPerMile}
                 onChange={(v) => setPaceSecondsPerMile(v)}
-                placeholder="0:00"
               />
             </div>
           </div>
@@ -71,13 +69,11 @@ export function App() {
                 label="km/h"
                 value={speedKilometersPerHour}
                 onChange={(v) => setSpeedKilometersPerHour(v)}
-                placeholder="0"
               />
               <SpeedInput
                 label="mph"
                 value={speedMilesPerHour}
                 onChange={(v) => setSpeedMilesPerHour(v)}
-                placeholder="0"
               />
             </div>
           </div>

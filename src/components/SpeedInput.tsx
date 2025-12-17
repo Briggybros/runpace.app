@@ -1,32 +1,136 @@
-import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Minus, Plus } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface SpeedInputProps {
   label?: string;
   value?: number;
   onChange?: (value: number) => void;
-  placeholder?: string | number;
 }
 
-export function SpeedInput({
-  label,
-  value,
-  onChange,
-  placeholder,
-}: SpeedInputProps) {
+export function SpeedInput({ label, value, onChange }: SpeedInputProps) {
+  const [speed, setSpeed] = useState((value ?? 0).toFixed(2));
+
+  // Keep speed up to date if value changes
+  useEffect(() => {
+    if (value != null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setSpeed(value.toFixed(2));
+    }
+  }, [value]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+
+    // Allow invalid while typing
+    setSpeed(val);
+  };
+
+  const handleBlur = () => {
+    const num = parseFloat(speed);
+    const safe = !isNaN(num) && num >= 0 ? num : 0;
+
+    setSpeed(safe.toFixed(2));
+    onChange?.(safe);
+  };
+
+  const handleChange = (delta: number) => {
+    const newSpeed = Math.max(0, (value ?? 0) + delta);
+    onChange?.(newSpeed);
+  };
+
+  const [open, _setOpen] = useState(false);
+
+  const setOpen = (open: boolean) => {
+    if (!open) {
+      handleBlur();
+    }
+    _setOpen(open);
+  };
+
   return (
-    <div className="group relative">
-      <Input
-        type="number"
-        value={value?.toFixed(2)}
-        onChange={(e) => onChange?.(Number(e.target.value))}
-        placeholder={String(placeholder)}
-        className="h-20 rounded-xl border-2 px-4 pb-6 pt-4 text-center text-2xl font-mono transition-all focus:scale-[1.02]"
-        step={"0.01"}
-        inputMode={"decimal"}
-      />
-      <div className="pointer-events-none absolute bottom-2 right-3 text-xs font-medium text-muted-foreground/60">
-        {label}
+    <Dialog open={open} onOpenChange={setOpen}>
+      <div className="group relative">
+        <DialogTrigger className="h-20 w-full rounded-xl border-2 px-4 pb-6 pt-4 text-center text-2xl font-mono transition-all focus:scale-[1.02]">
+          {value?.toFixed(2)}
+        </DialogTrigger>
+        <div className="pointer-events-none absolute bottom-2 right-3 text-xs font-medium text-muted-foreground/60">
+          {label}
+        </div>
       </div>
-    </div>
+
+      <DialogContent>
+        <DialogHeader className="hidden">
+          <DialogTitle>Speed Input</DialogTitle>
+        </DialogHeader>
+
+        <div className="flex flex-col items-center gap-4">
+          <input
+            type="text"
+            inputMode="decimal"
+            value={speed}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            onClick={(e) => e.currentTarget.select()}
+            onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
+            className="text-6xl font-mono font-bold text-center w-full bg-transparent border-0 focus:outline-none focus:ring-0 tabular-nums"
+            placeholder="0.00"
+          />
+          <div className="text-sm text-muted-foreground">{label}</div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => handleChange(-1)}
+            className="h-16"
+          >
+            <Minus className="h-5 w-5 mr-2" />
+            1.0
+          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => handleChange(1)}
+            className="h-16"
+          >
+            <Plus className="h-5 w-5 mr-2" />
+            1.0
+          </Button>
+        </div>
+
+        {/* Small increment buttons */}
+        <div className="grid grid-cols-4 gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleChange(-0.5)}
+          >
+            -0.5
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handleChange(-0.1)}
+          >
+            -0.1
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => handleChange(0.1)}>
+            +0.1
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => handleChange(0.5)}>
+            +0.5
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
