@@ -37,8 +37,8 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-background p-4 flex flex-col justify-between">
-        <div className="max-w-lg space-y-6">
+      <div className="min-h-screen w-full bg-background p-4 flex flex-col justify-between items-center">
+        <div className="w-xl max-w-full space-y-6">
           {/* Pace Section */}
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
@@ -84,25 +84,25 @@ export function App() {
               <span>Race Times</span>
             </div>
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between rounded-lg border bg-background px-3 py-2.5">
+              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
                 <span className="text-muted-foreground">5K</span>
                 <Time className="font-mono text-lg font-semibold">
                   {time5kSeconds}
                 </Time>
               </div>
-              <div className="flex items-center justify-between rounded-lg border bg-background px-3 py-2.5">
+              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
                 <span className="text-muted-foreground">10K</span>
                 <Time className="font-mono text-lg font-semibold">
                   {time10kSeconds}
                 </Time>
               </div>
-              <div className="flex items-center justify-between rounded-lg border bg-background px-3 py-2.5">
+              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
                 <span className="text-muted-foreground">Half Marathon</span>
                 <Time className="font-mono text-lg font-semibold">
                   {timeHalfMarathonSeconds}
                 </Time>
               </div>
-              <div className="flex items-center justify-between rounded-lg border bg-background px-3 py-2.5">
+              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
                 <span className="text-muted-foreground">Marathon</span>
                 <Time className="font-mono text-lg font-semibold">
                   {timeMarathonSeconds}
