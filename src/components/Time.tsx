@@ -12,9 +12,9 @@ export function Time({
     <span {...rest}>
       {Number.isFinite(children) ? (
         formatter.format({
-          hours: Math.round(children / 3600),
-          minutes: Math.round((children % 3600) / 60),
-          seconds: Math.round(children) % 60,
+          hours: Math.floor(children / 3600),
+          minutes: Math.floor((children % 3600) / 60),
+          seconds: Math.floor(children) % 60,
         })
       ) : (
         <Infinity />

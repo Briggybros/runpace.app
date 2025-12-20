@@ -25,7 +25,7 @@ export function PaceInput({ label, value, onChange }: PaceInputProps) {
   const _value = Number.isFinite(value) ? (value ?? 0) : 0;
 
   const minutes = Math.floor((_value ?? 0) / 60);
-  const seconds = Math.round((_value ?? 0) % 60);
+  const seconds = Math.floor((_value ?? 0) % 60);
 
   const setMinutes = (newMinutes: number) => {
     onChange?.(clamp(newMinutes, 0, 59) * 60 + ((_value ?? 0) % 60));
