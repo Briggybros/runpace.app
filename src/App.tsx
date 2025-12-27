@@ -3,7 +3,7 @@ import { PaceInput } from "@/components/PaceInput";
 import { Time } from "@/components/Time";
 import { SpeedInput } from "./components/SpeedInput";
 import { useState } from "react";
-import { ThemeProvider } from "./theme-provider";
+import { ThemeProvider } from "./context/theme";
 
 const MILES_PER_KM = 0.621371;
 
