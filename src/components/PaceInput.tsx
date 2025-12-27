@@ -10,12 +10,12 @@ const formatter = new Intl.DurationFormat(undefined, {
 });
 
 interface PaceInputProps {
-  label?: string;
+  units?: string;
   value?: number;
   onChange?: (value: number) => void;
 }
 
-export function PaceInput({ label, value, onChange }: PaceInputProps) {
+export function PaceInput({ units, value, onChange }: PaceInputProps) {
   const _value = Number.isFinite(value) ? (value ?? 0) : 0;
 
   const minutes = Math.floor((_value ?? 0) / 60);
@@ -89,7 +89,7 @@ export function PaceInput({ label, value, onChange }: PaceInputProps) {
       open={open}
       onOpenChange={setOpen}
       label={time}
-      units={label}
+      units={units}
       title="Pace Input"
     >
       <div className="flex items-center justify-center gap-4">
@@ -163,7 +163,7 @@ export function PaceInput({ label, value, onChange }: PaceInputProps) {
           </Button>
         </div>
       </div>
-      <div className="text-sm text-muted-foreground text-center">{label}</div>
+      <div className="text-sm text-muted-foreground text-center">{units}</div>
       <div className="flex justify-center gap-2">
         <Button
           variant="outline"

@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { InputDialog } from "./InputDialog";
 
 interface SpeedInputProps {
-  label?: string;
+  units?: string;
   value?: number;
   onChange?: (value: number) => void;
 }
 
-export function SpeedInput({ label, value, onChange }: SpeedInputProps) {
+export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
   const [speed, setSpeed] = useState((value ?? 0).toFixed(2));
 
   // Keep speed up to date if value changes
@@ -54,7 +54,7 @@ export function SpeedInput({ label, value, onChange }: SpeedInputProps) {
       open={open}
       onOpenChange={setOpen}
       label={value?.toFixed(2)}
-      units={label}
+      units={units}
       title="Speed Input"
     >
       <div className="flex flex-col items-center gap-4">
@@ -69,7 +69,7 @@ export function SpeedInput({ label, value, onChange }: SpeedInputProps) {
           className="text-6xl font-mono font-bold text-center w-full bg-transparent border-0 focus:outline-none focus:ring-0 tabular-nums"
           placeholder="0.00"
         />
-        <div className="text-sm text-muted-foreground">{label}</div>
+        <div className="text-sm text-muted-foreground">{units}</div>
       </div>
 
       <div className="grid grid-cols-2 gap-3">

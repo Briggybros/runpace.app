@@ -47,12 +47,12 @@ export function App() {
             </h2>
             <div className="grid grid-cols-2 gap-3">
               <PaceInput
-                label="min/km"
+                units="min/km"
                 value={paceSecondsPerKilometer}
                 onChange={(v) => setPaceSecondsPerKilometer(v)}
               />
               <PaceInput
-                label="min/mile"
+                units="min/mile"
                 value={paceSecondsPerMile}
                 onChange={(v) => setPaceSecondsPerMile(v)}
               />
@@ -66,12 +66,12 @@ export function App() {
             </h2>
             <div className="grid grid-cols-2 gap-3">
               <SpeedInput
-                label="km/h"
+                units="km/h"
                 value={speedKilometersPerHour}
                 onChange={(v) => setSpeedKilometersPerHour(v)}
               />
               <SpeedInput
-                label="mph"
+                units="mph"
                 value={speedMilesPerHour}
                 onChange={(v) => setSpeedMilesPerHour(v)}
               />
