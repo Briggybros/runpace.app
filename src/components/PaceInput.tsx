@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
 import {
   Infinity as IconInfinity,
   Minus as IconMinus,
   Plus as IconPlus,
 } from "lucide-react";
 import { useCallback, useState, type ChangeEvent } from "react";
-import { clamp } from "@/lib/clamp";
 import { InputDialog } from "./InputDialog";
+import { Button } from "@/components/ui/button";
+import { clamp } from "@/lib/clamp";
 
 const formatter = new Intl.DurationFormat(undefined, {
   style: "digital",

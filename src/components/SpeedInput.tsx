@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { Minus as IconMinus, Plus as IconPlus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { InputDialog } from "./InputDialog";
+import { Button } from "@/components/ui/button";
 
 interface SpeedInputProps {
   units?: string;
