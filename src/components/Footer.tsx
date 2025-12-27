@@ -1,6 +1,9 @@
 import { Github as IconGithub } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="p-4 pb-0 text-center">
       <a
@@ -10,7 +13,7 @@ export function Footer() {
         className="inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-xs text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all shadow-sm"
       >
         <IconGithub className="h-3.5 w-3.5" />
-        <span>View on GitHub</span>
+        <span>{t("View on Github")}</span>
       </a>
     </footer>
   );

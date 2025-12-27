@@ -4,6 +4,7 @@ import {
   Zap as IconZap,
 } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ThemeProvider } from "./context/theme";
 import { TimeEntry } from "@/components/TimeEntry";
 import { Footer } from "@/components/Footer";
@@ -14,6 +15,8 @@ import { SpeedInput } from "@/components/SpeedInput";
 const MILES_PER_KM = 0.621371;
 
 export function App() {
+  const { t } = useTranslation();
+
   const [speedKilometersPerHour, setSpeedKilometersPerHour] = useState(10);
 
   /** Speed in miles per hour */
@@ -52,16 +55,16 @@ export function App() {
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
               <IconZap className="h-3.5 w-3.5" />
-              <span>Pace</span>
+              <span>{t("Pace")}</span>
             </h2>
             <div className="grid grid-cols-2 gap-3">
               <PaceInput
-                units="min/km"
+                units={t("min/km")}
                 value={paceSecondsPerKilometer}
                 onChange={(v) => setPaceSecondsPerKilometer(v)}
               />
               <PaceInput
-                units="min/mile"
+                units={t("min/mi")}
                 value={paceSecondsPerMile}
                 onChange={(v) => setPaceSecondsPerMile(v)}
               />
@@ -72,16 +75,16 @@ export function App() {
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
               <IconGauge className="h-3.5 w-3.5" />
-              <span>Speed</span>
+              <span>{t("Speed")}</span>
             </h2>
             <div className="grid grid-cols-2 gap-3">
               <SpeedInput
-                units="km/h"
+                units={t("km/h")}
                 value={speedKilometersPerHour}
                 onChange={(v) => setSpeedKilometersPerHour(v)}
               />
               <SpeedInput
-                units="mph"
+                units={t("mph")}
                 value={speedMilesPerHour}
                 onChange={(v) => setSpeedMilesPerHour(v)}
               />
@@ -92,13 +95,16 @@ export function App() {
           <div className="rounded-xl border bg-muted/20 p-5">
             <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider font-medium text-muted-foreground">
               <IconTimer className="h-3.5 w-3.5" />
-              <span>Race Times</span>
+              <span>{t("Race Times")}</span>
             </div>
             <div className="space-y-1.5">
-              <TimeEntry label="5K" time={time5kSeconds} />
-              <TimeEntry label="10K" time={time10kSeconds} />
-              <TimeEntry label="Half Marathon" time={timeHalfMarathonSeconds} />
-              <TimeEntry label="Marathon" time={timeMarathonSeconds} />
+              <TimeEntry label={t("5K")} time={time5kSeconds} />
+              <TimeEntry label={t("10K")} time={time10kSeconds} />
+              <TimeEntry
+                label={t("Half Marathon")}
+                time={timeHalfMarathonSeconds}
+              />
+              <TimeEntry label={t("Marathon")} time={timeMarathonSeconds} />
             </div>
           </div>
         </div>
