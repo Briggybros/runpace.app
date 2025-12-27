@@ -34,10 +34,13 @@ export function App() {
   const setPaceSecondsPerMile = (seconds: number) =>
     setSpeedMilesPerHour(3600 / seconds);
 
-  /** Time in seconds to run a 5k in seconds */
+  /** Time in seconds to run a 5k */
   const time5kSeconds = paceSecondsPerKilometer * 5;
+  /** Time in seconds to run a 10k */
   const time10kSeconds = paceSecondsPerKilometer * 10;
+  /** Time in seconds to run a half marathon */
   const timeHalfMarathonSeconds = paceSecondsPerKilometer * 21.1;
+  /** Time in seconds to run a marathon */
   const timeMarathonSeconds = paceSecondsPerKilometer * 42.2;
 
   return (
