@@ -102,7 +102,6 @@ export function App() {
           </div>
         </div>
 
-        {/* Footer */}
         <Footer />
       </div>
     </ThemeProvider>
