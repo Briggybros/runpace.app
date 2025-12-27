@@ -4,6 +4,7 @@ import { Time } from "@/components/Time";
 import { SpeedInput } from "./components/SpeedInput";
 import { useState } from "react";
 import { ThemeProvider } from "./context/theme";
+import { TimeEntry } from "./components/TimeEntry";
 
 const MILES_PER_KM = 0.621371;
 
@@ -58,6 +59,7 @@ export function App() {
               />
             </div>
           </div>
+
           {/* Speed Section */}
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
@@ -77,6 +79,7 @@ export function App() {
               />
             </div>
           </div>
+
           {/* Race Times - Read-only info */}
           <div className="rounded-xl border bg-muted/20 p-5">
             <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider font-medium text-muted-foreground">
@@ -84,30 +87,10 @@ export function App() {
               <span>Race Times</span>
             </div>
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
-                <span className="text-muted-foreground">5K</span>
-                <Time className="font-mono text-lg font-semibold">
-                  {time5kSeconds}
-                </Time>
-              </div>
-              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
-                <span className="text-muted-foreground">10K</span>
-                <Time className="font-mono text-lg font-semibold">
-                  {time10kSeconds}
-                </Time>
-              </div>
-              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
-                <span className="text-muted-foreground">Half Marathon</span>
-                <Time className="font-mono text-lg font-semibold">
-                  {timeHalfMarathonSeconds}
-                </Time>
-              </div>
-              <div className="flex items-center justify-between flex-wrap-reverse rounded-lg border bg-background px-3 py-2.5">
-                <span className="text-muted-foreground">Marathon</span>
-                <Time className="font-mono text-lg font-semibold">
-                  {timeMarathonSeconds}
-                </Time>
-              </div>
+              <TimeEntry label="5K" time={time5kSeconds} />
+              <TimeEntry label="10K" time={time10kSeconds} />
+              <TimeEntry label="Half Marathon" time={timeHalfMarathonSeconds} />
+              <TimeEntry label="Marathon" time={timeMarathonSeconds} />
             </div>
           </div>
         </div>
