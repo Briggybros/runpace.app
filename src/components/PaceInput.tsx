@@ -1,14 +1,8 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Infinity, Minus, Plus } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
 import { clamp } from "@/lib/clamp";
+import { InputDialog } from "./InputDialog";
 
 const formatter = new Intl.DurationFormat(undefined, {
   style: "digital",
@@ -91,124 +85,115 @@ export function PaceInput({ label, value, onChange }: PaceInputProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <div className="group relative">
-        <DialogTrigger className="h-20 w-full rounded-xl border-2 px-4 pb-6 pt-4 text-center text-2xl font-mono transition-all focus:scale-[1.02]">
-          {time}
-        </DialogTrigger>
-        <div className="pointer-events-none absolute bottom-2 right-3 text-xs font-medium text-muted-foreground/60">
-          {label}
+    <InputDialog
+      open={open}
+      onOpenChange={setOpen}
+      label={time}
+      units={label}
+      title="Pace Input"
+    >
+      <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col items-center gap-3">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 rounded-full"
+            onClick={() => handleMinutesChange(1)}
+          >
+            <Plus className="h-5 w-5" />
+          </Button>
+
+          <div className="flex flex-col items-center">
+            <input
+              type="text"
+              inputMode="numeric"
+              tabIndex={1}
+              value={minutes.toString().padStart(2, "0")}
+              onChange={handleMinutesInput}
+              onClick={(e) => e.currentTarget.select()}
+              onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
+              className="w-24 text-center text-5xl font-mono font-bold tabular-nums bg-transparent border-0 focus:outline-none focus:ring-0"
+            />
+            <div className="text-xs text-muted-foreground mt-1">min</div>
+          </div>
+
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 rounded-full"
+            onClick={() => handleMinutesChange(-1)}
+          >
+            <Minus className="h-5 w-5" />
+          </Button>
+        </div>
+
+        <div className="text-5xl font-mono font-bold mb-8">:</div>
+
+        <div className="flex flex-col items-center gap-3">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 rounded-full"
+            onClick={() => handleSecondsChange(1)}
+          >
+            <Plus className="h-5 w-5" />
+          </Button>
+
+          <div className="flex flex-col items-center">
+            <input
+              type="text"
+              inputMode="numeric"
+              tabIndex={2}
+              value={seconds.toString().padStart(2, "0")}
+              onChange={handleSecondsInput}
+              onClick={(e) => e.currentTarget.select()}
+              onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
+              className="w-24 text-center text-5xl font-mono font-bold tabular-nums bg-transparent border-0 focus:outline-none focus:ring-0"
+            />
+            <div className="text-xs text-muted-foreground mt-1">sec</div>
+          </div>
+
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 rounded-full"
+            onClick={() => handleSecondsChange(-1)}
+          >
+            <Minus className="h-5 w-5" />
+          </Button>
         </div>
       </div>
-
-      <DialogContent>
-        <DialogHeader className="hidden">
-          <DialogTitle>Pace Input</DialogTitle>
-        </DialogHeader>
-
-        <div className="flex items-center justify-center gap-4">
-          <div className="flex flex-col items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-12 w-12 rounded-full"
-              onClick={() => handleMinutesChange(1)}
-            >
-              <Plus className="h-5 w-5" />
-            </Button>
-
-            <div className="flex flex-col items-center">
-              <input
-                type="text"
-                inputMode="numeric"
-                tabIndex={1}
-                value={minutes.toString().padStart(2, "0")}
-                onChange={handleMinutesInput}
-                onClick={(e) => e.currentTarget.select()}
-                onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
-                className="w-24 text-center text-5xl font-mono font-bold tabular-nums bg-transparent border-0 focus:outline-none focus:ring-0"
-              />
-              <div className="text-xs text-muted-foreground mt-1">min</div>
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-12 w-12 rounded-full"
-              onClick={() => handleMinutesChange(-1)}
-            >
-              <Minus className="h-5 w-5" />
-            </Button>
-          </div>
-
-          <div className="text-5xl font-mono font-bold mb-8">:</div>
-
-          <div className="flex flex-col items-center gap-3">
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-12 w-12 rounded-full"
-              onClick={() => handleSecondsChange(1)}
-            >
-              <Plus className="h-5 w-5" />
-            </Button>
-
-            <div className="flex flex-col items-center">
-              <input
-                type="text"
-                inputMode="numeric"
-                tabIndex={2}
-                value={seconds.toString().padStart(2, "0")}
-                onChange={handleSecondsInput}
-                onClick={(e) => e.currentTarget.select()}
-                onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
-                className="w-24 text-center text-5xl font-mono font-bold tabular-nums bg-transparent border-0 focus:outline-none focus:ring-0"
-              />
-              <div className="text-xs text-muted-foreground mt-1">sec</div>
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              className="h-12 w-12 rounded-full"
-              onClick={() => handleSecondsChange(-1)}
-            >
-              <Minus className="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-        <div className="text-sm text-muted-foreground text-center">{label}</div>
-        <div className="flex justify-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleMinutesChange(-5)}
-          >
-            -5m
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleSecondsChange(-5)}
-          >
-            -5s
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleSecondsChange(5)}
-          >
-            +5s
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleMinutesChange(5)}
-          >
-            +5m
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+      <div className="text-sm text-muted-foreground text-center">{label}</div>
+      <div className="flex justify-center gap-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handleMinutesChange(-5)}
+        >
+          -5m
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handleSecondsChange(-5)}
+        >
+          -5s
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handleSecondsChange(5)}
+        >
+          +5s
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handleMinutesChange(5)}
+        >
+          +5m
+        </Button>
+      </div>
+    </InputDialog>
   );
 }

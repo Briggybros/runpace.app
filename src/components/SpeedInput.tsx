@@ -1,13 +1,7 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
+import { InputDialog } from "./InputDialog";
 
 interface SpeedInputProps {
   label?: string;
@@ -56,81 +50,64 @@ export function SpeedInput({ label, value, onChange }: SpeedInputProps) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <div className="group relative">
-        <DialogTrigger className="h-20 w-full rounded-xl border-2 px-4 pb-6 pt-4 text-center text-2xl font-mono transition-all focus:scale-[1.02]">
-          {value?.toFixed(2)}
-        </DialogTrigger>
-        <div className="pointer-events-none absolute bottom-2 right-3 text-xs font-medium text-muted-foreground/60">
-          {label}
-        </div>
+    <InputDialog
+      open={open}
+      onOpenChange={setOpen}
+      label={value?.toFixed(2)}
+      units={label}
+      title="Speed Input"
+    >
+      <div className="flex flex-col items-center gap-4">
+        <input
+          type="text"
+          inputMode="decimal"
+          value={speed}
+          onChange={handleInputChange}
+          onBlur={handleBlur}
+          onClick={(e) => e.currentTarget.select()}
+          onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
+          className="text-6xl font-mono font-bold text-center w-full bg-transparent border-0 focus:outline-none focus:ring-0 tabular-nums"
+          placeholder="0.00"
+        />
+        <div className="text-sm text-muted-foreground">{label}</div>
       </div>
 
-      <DialogContent>
-        <DialogHeader className="hidden">
-          <DialogTitle>Speed Input</DialogTitle>
-        </DialogHeader>
+      <div className="grid grid-cols-2 gap-3">
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => handleChange(-1)}
+          className="h-16"
+        >
+          <Minus className="h-5 w-5 mr-2" />
+          1.0
+        </Button>
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => handleChange(1)}
+          className="h-16"
+        >
+          <Plus className="h-5 w-5 mr-2" />
+          1.0
+        </Button>
+      </div>
 
-        <div className="flex flex-col items-center gap-4">
-          <input
-            type="text"
-            inputMode="decimal"
-            value={speed}
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            onClick={(e) => e.currentTarget.select()}
-            onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
-            className="text-6xl font-mono font-bold text-center w-full bg-transparent border-0 focus:outline-none focus:ring-0 tabular-nums"
-            placeholder="0.00"
-          />
-          <div className="text-sm text-muted-foreground">{label}</div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3">
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => handleChange(-1)}
-            className="h-16"
-          >
-            <Minus className="h-5 w-5 mr-2" />
-            1.0
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => handleChange(1)}
-            className="h-16"
-          >
-            <Plus className="h-5 w-5 mr-2" />
-            1.0
-          </Button>
-        </div>
-
-        {/* Small increment buttons */}
-        <div className="grid grid-cols-4 gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleChange(-0.5)}
-          >
-            -0.5
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handleChange(-0.1)}
-          >
-            -0.1
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => handleChange(0.1)}>
-            +0.1
-          </Button>
-          <Button variant="outline" size="sm" onClick={() => handleChange(0.5)}>
-            +0.5
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+      {/* Small increment buttons */}
+      <div className="grid grid-cols-4 gap-2">
+        <Button variant="outline" size="sm" onClick={() => handleChange(-0.5)}>
+          -0.5
+        </Button>
+        <Button variant="outline" size="sm" onClick={() => handleChange(-0.1)}>
+          -0.1
+        </Button>
+        <Button variant="outline" size="sm" onClick={() => handleChange(0.1)}>
+          +0.1
+        </Button>
+        <Button variant="outline" size="sm" onClick={() => handleChange(0.5)}>
+          +0.5
+        </Button>
+      </div>
+    </InputDialog>
   );
 }
