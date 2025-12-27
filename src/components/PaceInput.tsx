@@ -4,6 +4,7 @@ import {
   Plus as IconPlus,
 } from "lucide-react";
 import { useCallback, useState, type ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { InputDialog } from "./InputDialog";
 import { Button } from "@/components/ui/button";
 import { clamp } from "@/lib/clamp";
@@ -20,6 +21,8 @@ interface PaceInputProps {
 }
 
 export function PaceInput({ units, value, onChange }: PaceInputProps) {
+  const { t } = useTranslation();
+
   const _value = Number.isFinite(value) ? (value ?? 0) : 0;
 
   const minutes = Math.floor((_value ?? 0) / 60);
@@ -185,28 +188,28 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
           size="sm"
           onClick={() => handleMinutesChange(-5)}
         >
-          -5m
+          -5{t("minutes_suffix")}
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => handleSecondsChange(-5)}
         >
-          -5s
+          -5{t("seconds_suffix")}
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => handleSecondsChange(5)}
         >
-          +5s
+          +5{t("seconds_suffix")}
         </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => handleMinutesChange(5)}
         >
-          +5m
+          +5{t("minutes_suffix")}
         </Button>
       </div>
     </InputDialog>
