@@ -1,5 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Infinity, Minus, Plus } from "lucide-react";
+import {
+  Infinity as IconInfinity,
+  Minus as IconMinus,
+  Plus as IconPlus,
+} from "lucide-react";
 import { useState, type ChangeEvent } from "react";
 import { clamp } from "@/lib/clamp";
 import { InputDialog } from "./InputDialog";
@@ -71,7 +75,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
   };
 
   const time = !Number.isFinite(value) ? (
-    <Infinity className="mx-auto" />
+    <IconInfinity className="mx-auto" />
   ) : _value && _value > 0 ? (
     formatter.format({
       hours: Math.floor(_value / 3600),
@@ -100,7 +104,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
             className="h-12 w-12 rounded-full"
             onClick={() => handleMinutesChange(1)}
           >
-            <Plus className="h-5 w-5" />
+            <IconPlus className="h-5 w-5" />
           </Button>
 
           <div className="flex flex-col items-center">
@@ -123,7 +127,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
             className="h-12 w-12 rounded-full"
             onClick={() => handleMinutesChange(-1)}
           >
-            <Minus className="h-5 w-5" />
+            <IconMinus className="h-5 w-5" />
           </Button>
         </div>
 
@@ -136,7 +140,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
             className="h-12 w-12 rounded-full"
             onClick={() => handleSecondsChange(1)}
           >
-            <Plus className="h-5 w-5" />
+            <IconPlus className="h-5 w-5" />
           </Button>
 
           <div className="flex flex-col items-center">
@@ -159,7 +163,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
             className="h-12 w-12 rounded-full"
             onClick={() => handleSecondsChange(-1)}
           >
-            <Minus className="h-5 w-5" />
+            <IconMinus className="h-5 w-5" />
           </Button>
         </div>
       </div>

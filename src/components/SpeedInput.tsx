@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
+import { Minus as IconMinus, Plus as IconPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { InputDialog } from "./InputDialog";
 
@@ -79,7 +79,7 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
           onClick={() => handleChange(-1)}
           className="h-16"
         >
-          <Minus className="h-5 w-5 mr-2" />
+          <IconMinus className="h-5 w-5 mr-2" />
           1.0
         </Button>
         <Button
@@ -88,7 +88,7 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
           onClick={() => handleChange(1)}
           className="h-16"
         >
-          <Plus className="h-5 w-5 mr-2" />
+          <IconPlus className="h-5 w-5 mr-2" />
           1.0
         </Button>
       </div>

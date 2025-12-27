@@ -1,4 +1,4 @@
-import { Infinity } from "lucide-react";
+import { Infinity as IconInfinity } from "lucide-react";
 
 const formatter = new Intl.DurationFormat(undefined, {
   style: "digital",
@@ -17,7 +17,7 @@ export function Time({
           seconds: Math.floor(children) % 60,
         })
       ) : (
-        <Infinity />
+        <IconInfinity />
       )}
     </span>
   );

@@ -1,6 +1,9 @@
-import { Timer, Gauge, Zap, Github } from "lucide-react";
+import {
+  Timer as IconTimer,
+  Gauge as IconGauge,
+  Zap as IconZap,
+} from "lucide-react";
 import { PaceInput } from "@/components/PaceInput";
-import { Time } from "@/components/Time";
 import { SpeedInput } from "./components/SpeedInput";
 import { useState } from "react";
 import { ThemeProvider } from "./context/theme";
@@ -44,7 +47,7 @@ export function App() {
           {/* Pace Section */}
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
-              <Zap className="h-3.5 w-3.5" />
+              <IconZap className="h-3.5 w-3.5" />
               <span>Pace</span>
             </h2>
             <div className="grid grid-cols-2 gap-3">
@@ -64,7 +67,7 @@ export function App() {
           {/* Speed Section */}
           <div className="space-y-3">
             <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
-              <Gauge className="h-3.5 w-3.5" />
+              <IconGauge className="h-3.5 w-3.5" />
               <span>Speed</span>
             </h2>
             <div className="grid grid-cols-2 gap-3">
@@ -84,7 +87,7 @@ export function App() {
           {/* Race Times - Read-only info */}
           <div className="rounded-xl border bg-muted/20 p-5">
             <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider font-medium text-muted-foreground">
-              <Timer className="h-3.5 w-3.5" />
+              <IconTimer className="h-3.5 w-3.5" />
               <span>Race Times</span>
             </div>
             <div className="space-y-1.5">
