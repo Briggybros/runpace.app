@@ -4,7 +4,7 @@ import {
   Minus as IconMinus,
   Plus as IconPlus,
 } from "lucide-react";
-import { useState, type ChangeEvent } from "react";
+import { useCallback, useState, type ChangeEvent } from "react";
 import { clamp } from "@/lib/clamp";
 import { InputDialog } from "./InputDialog";
 
@@ -88,6 +88,16 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
 
   const [open, setOpen] = useState(false);
 
+  const doSelectInput = useCallback(
+    (input: HTMLInputElement | null) => {
+      if (open && input) {
+        input.focus();
+        input.select();
+      }
+    },
+    [open],
+  );
+
   return (
     <InputDialog
       open={open}
@@ -109,6 +119,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
 
           <div className="flex flex-col items-center">
             <input
+              ref={doSelectInput}
               type="text"
               inputMode="numeric"
               tabIndex={1}

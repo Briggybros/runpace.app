@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Minus as IconMinus, Plus as IconPlus } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { InputDialog } from "./InputDialog";
 
 interface SpeedInputProps {
@@ -49,6 +49,16 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
     _setOpen(open);
   };
 
+  const doSelectInput = useCallback(
+    (input: HTMLInputElement | null) => {
+      if (open && input) {
+        input.focus();
+        input.select();
+      }
+    },
+    [open],
+  );
+
   return (
     <InputDialog
       open={open}
@@ -59,6 +69,7 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
     >
       <div className="flex flex-col items-center gap-4">
         <input
+          ref={doSelectInput}
           type="text"
           inputMode="decimal"
           value={speed}
