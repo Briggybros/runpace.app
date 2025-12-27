@@ -1,3 +1,4 @@
+import type { ComponentProps, ReactNode } from "react";
 import {
   Dialog,
   DialogContent,
@@ -5,7 +6,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { ComponentProps, ReactNode } from "react";
 
 export interface InputDialogProps extends ComponentProps<typeof Dialog> {
   label: ReactNode;

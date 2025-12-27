@@ -3,12 +3,13 @@ import {
   Gauge as IconGauge,
   Zap as IconZap,
 } from "lucide-react";
-import { PaceInput } from "@/components/PaceInput";
-import { SpeedInput } from "./components/SpeedInput";
 import { useState } from "react";
 import { ThemeProvider } from "./context/theme";
-import { TimeEntry } from "./components/TimeEntry";
-import { Footer } from "./components/Footer";
+import { TimeEntry } from "@/components/TimeEntry";
+import { Footer } from "@/components/Footer";
+
+import { PaceInput } from "@/components/PaceInput";
+import { SpeedInput } from "@/components/SpeedInput";
 
 const MILES_PER_KM = 0.621371;
 
