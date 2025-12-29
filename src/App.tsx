@@ -27,14 +27,14 @@ export function App() {
   const paceSecondsPerKilometer =
     speedKilometersPerHour === 0
       ? Number.POSITIVE_INFINITY
-      : 3600 / speedKilometersPerHour;
+      : Math.round(3600 / speedKilometersPerHour);
   const setPaceSecondsPerKilometer = (seconds: number) =>
     setSpeedKilometersPerHour(3600 / seconds);
 
   const paceSecondsPerMile =
     speedMilesPerHour === 0
       ? Number.POSITIVE_INFINITY
-      : 3600 / speedMilesPerHour;
+      : Math.round(3600 / speedMilesPerHour);
   const setPaceSecondsPerMile = (seconds: number) =>
     setSpeedMilesPerHour(3600 / seconds);
 
