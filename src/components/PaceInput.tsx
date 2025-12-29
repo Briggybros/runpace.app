@@ -68,7 +68,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     }
   };
 
-  const time = !Number.isFinite(value) ? (
+  const label = !Number.isFinite(value) ? (
     <IconInfinity className="mx-auto" />
   ) : _value >= 0 ? (
     formatter.format({
@@ -96,7 +96,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     <InputDialog
       open={open}
       onOpenChange={setOpen}
-      label={time}
+      label={label}
       units={units}
       title="Pace Input"
     >
