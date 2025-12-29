@@ -1,4 +1,8 @@
-import { Minus as IconMinus, Plus as IconPlus } from "lucide-react";
+import {
+  Infinity as IconInfinity,
+  Minus as IconMinus,
+  Plus as IconPlus,
+} from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { InputDialog } from "./InputDialog";
 import { Button } from "@/components/ui/button";
@@ -9,14 +13,18 @@ interface SpeedInputProps {
   onChange?: (value: number) => void;
 }
 
+function stringifySpeed(speed: number | undefined) {
+  return (Number.isFinite(speed) ? (speed ?? 0) : 0).toFixed(2);
+}
+
 export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
-  const [speed, setSpeed] = useState((value ?? 0).toFixed(2));
+  const [speed, setSpeed] = useState(stringifySpeed(value));
 
   // Keep speed up to date if value changes
   useEffect(() => {
     if (value != null) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSpeed(value.toFixed(2));
+      setSpeed(stringifySpeed(value));
     }
   }, [value]);
 
@@ -39,6 +47,12 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
     const newSpeed = Math.max(0, (value ?? 0) + delta);
     onChange?.(newSpeed);
   };
+
+  const label = !Number.isFinite(value) ? (
+    <IconInfinity className="mx-auto" />
+  ) : (
+    stringifySpeed(value)
+  );
 
   const [open, _setOpen] = useState(false);
 
@@ -63,7 +77,7 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
     <InputDialog
       open={open}
       onOpenChange={setOpen}
-      label={value?.toFixed(2)}
+      label={label}
       units={units}
       title="Speed Input"
     >

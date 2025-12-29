@@ -40,6 +40,10 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     setMinutes(minutes + change);
   };
 
+  const handleSecondsChange = (change: number) => {
+    onChange?.(clamp(_value + change, 0, 3599));
+  };
+
   const handleMinutesInput = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (val === "") {
@@ -50,19 +54,6 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
         setMinutes(num);
       }
     }
-  };
-
-  const handleSecondsChange = (change: number) => {
-    let final = seconds + change;
-    if (final >= 60) {
-      final -= 60;
-      setMinutes(minutes + 1);
-    }
-    if (final < 0) {
-      final += 60;
-      setMinutes(minutes - 1);
-    }
-    setSeconds(final);
   };
 
   const handleSecondsInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -77,9 +68,9 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     }
   };
 
-  const time = !Number.isFinite(value) ? (
+  const label = !Number.isFinite(value) ? (
     <IconInfinity className="mx-auto" />
-  ) : _value && _value > 0 ? (
+  ) : _value >= 0 ? (
     formatter.format({
       hours: Math.floor(_value / 3600),
       minutes: Math.floor((_value % 3600) / 60),
@@ -105,7 +96,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     <InputDialog
       open={open}
       onOpenChange={setOpen}
-      label={time}
+      label={label}
       units={units}
       title="Pace Input"
     >
