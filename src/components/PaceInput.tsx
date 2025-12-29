@@ -40,6 +40,10 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     setMinutes(minutes + change);
   };
 
+  const handleSecondsChange = (change: number) => {
+    onChange?.(clamp(_value + change, 0, 3599));
+  };
+
   const handleMinutesInput = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     if (val === "") {
@@ -50,10 +54,6 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
         setMinutes(num);
       }
     }
-  };
-
-  const handleSecondsChange = (change: number) => {
-    onChange?.(clamp(_value + change, 0, 3599));
   };
 
   const handleSecondsInput = (e: ChangeEvent<HTMLInputElement>) => {
