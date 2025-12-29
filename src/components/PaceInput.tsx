@@ -70,7 +70,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
 
   const time = !Number.isFinite(value) ? (
     <IconInfinity className="mx-auto" />
-  ) : _value && _value > 0 ? (
+  ) : _value >= 0 ? (
     formatter.format({
       hours: Math.floor(_value / 3600),
       minutes: Math.floor((_value % 3600) / 60),
