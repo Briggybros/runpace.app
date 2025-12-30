@@ -49,7 +49,7 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-full bg-background p-4 flex flex-col justify-between items-center">
+      <div className="min-h-dvh w-full bg-background p-4 flex flex-col justify-between items-center">
         <div className="w-xl max-w-full space-y-6">
           {/* Pace Section */}
           <div className="space-y-3">
