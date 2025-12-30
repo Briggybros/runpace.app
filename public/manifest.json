@@ -1,14 +1,8 @@
 {
-  "theme_color": "#030712",
   "background_color": "#030712",
-  "orientation": "portrait",
+  "categories": ["fitness", "utilities"],
+  "description": "A user friendly calculator to convert between pace and speed",
   "display": "standalone",
-  "dir": "left",
-  "lang": "en",
-  "name": "RunPace",
-  "short_name": "RunPace",
-  "start_url": "/?utm_source=pwa",
-  "scope": "/",
   "icons": [
     {
       "src": "/icon.svg",
@@ -40,5 +34,30 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ]
+  ],
+  "id": "runpace.app",
+  "name": "RunPace",
+  "orientation": "portrait",
+  "scope": "https://runpace.app/",
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop.png",
+      "sizes": "3020x1450",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop version screenshot",
+      "platform": "macos"
+    },
+    {
+      "src": "/screenshots/mobile.png",
+      "sizes": "682x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile version screenshot",
+      "platform": "android"
+    }
+  ],
+  "short_name": "RunPace",
+  "start_url": "/?utm_source=pwa",
+  "theme_color": "#030712"
 }
