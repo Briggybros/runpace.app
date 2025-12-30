@@ -1,11 +1,8 @@
-import {
-  Infinity as IconInfinity,
-  Minus as IconMinus,
-  Plus as IconPlus,
-} from "lucide-react";
-import { useCallback, useState, type ChangeEvent } from "react";
+import { Infinity as IconInfinity } from "lucide-react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { InputDialog } from "./InputDialog";
+import { Dial } from "./Dial";
 import { Button } from "@/components/ui/button";
 import { clamp } from "@/lib/clamp";
 
@@ -44,30 +41,6 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
     onChange?.(clamp(_value + change, 0, 3599));
   };
 
-  const handleMinutesInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    if (val === "") {
-      setMinutes(0);
-    } else {
-      const num = parseInt(val, 10);
-      if (!isNaN(num)) {
-        setMinutes(num);
-      }
-    }
-  };
-
-  const handleSecondsInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    if (val === "") {
-      setSeconds(0);
-    } else {
-      const num = parseInt(val, 10);
-      if (!isNaN(num)) {
-        setSeconds(num);
-      }
-    }
-  };
-
   const label = !Number.isFinite(value) ? (
     <IconInfinity className="mx-auto" />
   ) : _value >= 0 ? (
@@ -100,81 +73,43 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
       units={units}
       title="Pace Input"
     >
-      <div className="flex items-center justify-center gap-4">
-        <div className="flex flex-col items-center gap-3">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full"
-            onClick={() => handleMinutesChange(1)}
-          >
-            <IconPlus className="h-5 w-5" />
-          </Button>
+      {/* Input */}
+      <span className="flex items-center justify-center gap-4">
+        <Dial
+          ref={doSelectInput}
+          value={minutes}
+          label={t("minutes_short")}
+          digits={2}
+          onChange={setMinutes}
+          onIncrement={handleMinutesChange.bind(null, 1)}
+          onDecrement={handleMinutesChange.bind(null, -1)}
+          onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
+        />
 
-          <div className="flex flex-col items-center">
-            <input
-              ref={doSelectInput}
-              type="text"
-              inputMode="numeric"
-              tabIndex={1}
-              value={minutes.toString().padStart(2, "0")}
-              onChange={handleMinutesInput}
-              onClick={(e) => e.currentTarget.select()}
-              onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
-              className="w-24 text-center text-5xl font-mono font-bold tabular-nums bg-transparent border-0 focus:outline-none focus:ring-0"
-            />
-            <div className="text-xs text-muted-foreground mt-1">min</div>
-          </div>
+        <span className="text-5xl font-mono font-bold mb-8 pointer-events-none select-none">
+          :
+        </span>
 
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full"
-            onClick={() => handleMinutesChange(-1)}
-          >
-            <IconMinus className="h-5 w-5" />
-          </Button>
-        </div>
+        <Dial
+          value={seconds}
+          label={t("seconds_short")}
+          digits={2}
+          onChange={setSeconds}
+          onIncrement={handleSecondsChange.bind(null, 1)}
+          onDecrement={handleSecondsChange.bind(null, -1)}
+          onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
+        />
+      </span>
 
-        <div className="text-5xl font-mono font-bold mb-8">:</div>
+      {/* Units */}
+      <span className="text-sm text-muted-foreground text-center pointer-events-none select-none">
+        {units}
+      </span>
 
-        <div className="flex flex-col items-center gap-3">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full"
-            onClick={() => handleSecondsChange(1)}
-          >
-            <IconPlus className="h-5 w-5" />
-          </Button>
-
-          <div className="flex flex-col items-center">
-            <input
-              type="text"
-              inputMode="numeric"
-              tabIndex={2}
-              value={seconds.toString().padStart(2, "0")}
-              onChange={handleSecondsInput}
-              onClick={(e) => e.currentTarget.select()}
-              onKeyDown={(e) => e.key === "Enter" && setOpen(false)}
-              className="w-24 text-center text-5xl font-mono font-bold tabular-nums bg-transparent border-0 focus:outline-none focus:ring-0"
-            />
-            <div className="text-xs text-muted-foreground mt-1">sec</div>
-          </div>
-
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-12 w-12 rounded-full"
-            onClick={() => handleSecondsChange(-1)}
-          >
-            <IconMinus className="h-5 w-5" />
-          </Button>
-        </div>
-      </div>
-      <div className="text-sm text-muted-foreground text-center">{units}</div>
-      <div className="flex justify-center gap-2">
+      {/* Increment buttons */}
+      <span className="flex justify-center gap-2">
         <Button
+          className="cursor-pointer"
           variant="outline"
           size="sm"
           onClick={() => handleMinutesChange(-5)}
@@ -182,6 +117,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
           -5{t("minutes_suffix")}
         </Button>
         <Button
+          className="cursor-pointer"
           variant="outline"
           size="sm"
           onClick={() => handleSecondsChange(-5)}
@@ -189,6 +125,7 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
           -5{t("seconds_suffix")}
         </Button>
         <Button
+          className="cursor-pointer"
           variant="outline"
           size="sm"
           onClick={() => handleSecondsChange(5)}
@@ -196,13 +133,14 @@ export function PaceInput({ units, value, onChange }: PaceInputProps) {
           +5{t("seconds_suffix")}
         </Button>
         <Button
+          className="cursor-pointer"
           variant="outline"
           size="sm"
           onClick={() => handleMinutesChange(5)}
         >
           +5{t("minutes_suffix")}
         </Button>
-      </div>
+      </span>
     </InputDialog>
   );
 }

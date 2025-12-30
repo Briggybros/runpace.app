@@ -23,7 +23,7 @@ export function InputDialog({
   return (
     <Dialog {...props}>
       <div className="group relative">
-        <DialogTrigger className="h-20 w-full rounded-xl border-2 px-4 pb-6 pt-4 text-center text-2xl font-mono transition-all focus:scale-[1.02]">
+        <DialogTrigger className="h-20 w-full rounded-xl border-2 px-4 pb-6 pt-4 text-center text-2xl font-mono transition-all focus:scale-[1.02] cursor-pointer">
           {label}
         </DialogTrigger>
         {units ? (

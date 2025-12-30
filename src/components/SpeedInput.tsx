@@ -81,6 +81,7 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
       units={units}
       title="Speed Input"
     >
+      {/* Input */}
       <div className="flex flex-col items-center gap-4">
         <input
           ref={doSelectInput}
@@ -94,45 +95,68 @@ export function SpeedInput({ units, value, onChange }: SpeedInputProps) {
           className="text-6xl font-mono font-bold text-center w-full bg-transparent border-0 focus:outline-none focus:ring-0 tabular-nums"
           placeholder="0.00"
         />
-        <div className="text-sm text-muted-foreground">{units}</div>
+        <div className="text-sm text-muted-foreground pointer-events-none select-none">
+          {units}
+        </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      {/* Large increment buttons */}
+      <span className="grid grid-cols-2 gap-3">
         <Button
+          className="cursor-pointer h-16"
           variant="outline"
           size="lg"
           onClick={() => handleChange(-1)}
-          className="h-16"
         >
           <IconMinus className="h-5 w-5 mr-2" />
           1.0
         </Button>
         <Button
+          className="cursor-pointer h-16"
           variant="outline"
           size="lg"
           onClick={() => handleChange(1)}
-          className="h-16"
         >
           <IconPlus className="h-5 w-5 mr-2" />
           1.0
         </Button>
-      </div>
+      </span>
 
       {/* Small increment buttons */}
-      <div className="grid grid-cols-4 gap-2">
-        <Button variant="outline" size="sm" onClick={() => handleChange(-0.5)}>
+      <span className="grid grid-cols-4 gap-2">
+        <Button
+          className="cursor-pointer"
+          variant="outline"
+          size="sm"
+          onClick={() => handleChange(-0.5)}
+        >
           -0.5
         </Button>
-        <Button variant="outline" size="sm" onClick={() => handleChange(-0.1)}>
+        <Button
+          className="cursor-pointer"
+          variant="outline"
+          size="sm"
+          onClick={() => handleChange(-0.1)}
+        >
           -0.1
         </Button>
-        <Button variant="outline" size="sm" onClick={() => handleChange(0.1)}>
+        <Button
+          className="cursor-pointer"
+          variant="outline"
+          size="sm"
+          onClick={() => handleChange(0.1)}
+        >
           +0.1
         </Button>
-        <Button variant="outline" size="sm" onClick={() => handleChange(0.5)}>
+        <Button
+          className="cursor-pointer"
+          variant="outline"
+          size="sm"
+          onClick={() => handleChange(0.5)}
+        >
           +0.5
         </Button>
-      </div>
+      </span>
     </InputDialog>
   );
 }
