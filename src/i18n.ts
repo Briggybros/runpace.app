@@ -31,7 +31,7 @@ i18n
   });
 
 i18n.on("languageChanged", (lng) => {
-  document.documentElement.lang = lng;
+  document.documentElement.lang = i18n.resolvedLanguage || lng || "en";
 });
 
 export default i18n;
