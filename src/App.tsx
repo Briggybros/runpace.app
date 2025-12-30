@@ -50,14 +50,15 @@ export function App() {
   return (
     <ThemeProvider>
       <div className="min-h-dvh w-full bg-background p-4 flex flex-col justify-between items-center">
-        <div className="w-xl max-w-full space-y-6">
+        <main className="w-xl max-w-full space-y-6">
+          <h1 className="hidden">Run Pace</h1>
           {/* Pace Section */}
-          <div className="space-y-3">
-            <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
+          <section className="space-y-3">
+            <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1 pointer-events-none select-none">
               <IconZap className="h-3.5 w-3.5" />
               <span>{t("Pace")}</span>
             </h2>
-            <div className="grid grid-cols-2 gap-3">
+            <span className="grid grid-cols-2 gap-3">
               <PaceInput
                 units={t("min/km")}
                 value={paceSecondsPerKilometer}
@@ -68,16 +69,16 @@ export function App() {
                 value={paceSecondsPerMile}
                 onChange={(v) => setPaceSecondsPerMile(v)}
               />
-            </div>
-          </div>
+            </span>
+          </section>
 
           {/* Speed Section */}
-          <div className="space-y-3">
-            <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1">
+          <section className="space-y-3">
+            <h2 className="flex items-center gap-2 text-sm uppercase tracking-wider font-semibold text-muted-foreground px-1 pointer-events-none select-none">
               <IconGauge className="h-3.5 w-3.5" />
               <span>{t("Speed")}</span>
             </h2>
-            <div className="grid grid-cols-2 gap-3">
+            <span className="grid grid-cols-2 gap-3">
               <SpeedInput
                 units={t("km/h")}
                 value={speedKilometersPerHour}
@@ -88,26 +89,34 @@ export function App() {
                 value={speedMilesPerHour}
                 onChange={(v) => setSpeedMilesPerHour(v)}
               />
-            </div>
-          </div>
+            </span>
+          </section>
 
           {/* Race Times - Read-only info */}
-          <div className="rounded-xl border bg-muted/20 p-5">
-            <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider font-medium text-muted-foreground">
+          <details open className="rounded-xl border bg-muted/20 p-5">
+            <summary className="mb-3 flex items-center gap-2 text-xs uppercase tracking-wider font-medium text-muted-foreground pointer-events-none select-none">
               <IconTimer className="h-3.5 w-3.5" />
               <span>{t("Race Times")}</span>
-            </div>
-            <div className="space-y-1.5">
-              <TimeEntry label={t("5K")} time={time5kSeconds} />
-              <TimeEntry label={t("10K")} time={time10kSeconds} />
-              <TimeEntry
-                label={t("Half Marathon")}
-                time={timeHalfMarathonSeconds}
-              />
-              <TimeEntry label={t("Marathon")} time={timeMarathonSeconds} />
-            </div>
-          </div>
-        </div>
+            </summary>
+            <table className="w-full">
+              <thead className="hidden">
+                <tr>
+                  <th>{t("Distance")}</th>
+                  <th>{t("Time")}</th>
+                </tr>
+              </thead>
+              <tbody className="space-y-1.5">
+                <TimeEntry label={t("5K")} time={time5kSeconds} />
+                <TimeEntry label={t("10K")} time={time10kSeconds} />
+                <TimeEntry
+                  label={t("Half Marathon")}
+                  time={timeHalfMarathonSeconds}
+                />
+                <TimeEntry label={t("Marathon")} time={timeMarathonSeconds} />
+              </tbody>
+            </table>
+          </details>
+        </main>
 
         <Footer />
       </div>

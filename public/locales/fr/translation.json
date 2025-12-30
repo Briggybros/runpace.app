@@ -12,5 +12,7 @@
   "km/h": "km/h",
   "mph": "mph",
   "minutes_suffix": "m",
-  "seconds_suffix": "s"
+  "minutes_short": "min",
+  "seconds_suffix": "s",
+  "seconds_short": "sec"
 }

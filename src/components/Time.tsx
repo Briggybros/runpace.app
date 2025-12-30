@@ -7,9 +7,9 @@ const formatter = new Intl.DurationFormat(undefined, {
 export function Time({
   children,
   ...rest
-}: { children: number } & React.HTMLAttributes<HTMLSpanElement>) {
+}: { children: number } & React.HTMLAttributes<HTMLTimeElement>) {
   return (
-    <span {...rest}>
+    <time {...rest}>
       {Number.isFinite(children) ? (
         formatter.format({
           hours: Math.floor(children / 3600),
@@ -19,6 +19,6 @@ export function Time({
       ) : (
         <IconInfinity />
       )}
-    </span>
+    </time>
   );
 }
